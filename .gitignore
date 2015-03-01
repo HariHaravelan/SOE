@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StockOrderExecution
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Enter Total Number of Transactions");
+            int totalTransactions = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Side " + "Company " + "Quantity");
+
+            Console.WriteLine();
+
+            List<StockOrder> stockOrders = new List<StockOrder>();
+            StockOrder objStockOrder = null;
+            for (var i = 0; i < totalTransactions; i++)
+            {
+                string input = Console.ReadLine();
+
+                string[] arrInput = input.Split(' ');  //Input String should have space after the every value entry  
+
+                objStockOrder = new StockOrder();
+
+                objStockOrder.Side = arrInput[0];
+                objStockOrder.CompanyName = arrInput[1];
+                objStockOrder.Quantity = Convert.ToInt32(arrInput[2]);
+
+                stockOrders.Add(objStockOrder);
+            }
+
+            foreach (StockOrder val in stockOrders)
+            {
+                val.ReadOrder();
+
+            }
+
+            string res = objStockOrder.ToString();
+            Console.WriteLine();
+            Console.WriteLine(res);
+            Console.ReadLine();
+
+        }
+    }
+}
