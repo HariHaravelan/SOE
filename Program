@@ -35,7 +35,7 @@ namespace StockOrderExecution
 
             foreach (StockOrder order in stockOrders)
             {
-				Console.WriteLine (order.ProcessOrder());
+		Console.WriteLine (order.ProcessOrder());
             }
 
             
