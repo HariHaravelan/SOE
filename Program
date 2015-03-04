@@ -28,7 +28,7 @@ namespace StockOrderExecution
 
                 string[] arrInput = input.Split(' ');  //Input String should have space after the every value entry  
 
-				objStockOrder = new StockOrder(arrInput[0],arrInput[1],Convert.ToInt32(arrInput[2]),objOrderBook);
+		objStockOrder = new StockOrder(arrInput[0],arrInput[1],Convert.ToInt32(arrInput[2]),objOrderBook);
 
                 stockOrders.Add(objStockOrder);
             }
