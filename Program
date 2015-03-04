@@ -18,7 +18,7 @@ namespace StockOrderExecution
 
             Console.WriteLine();
 
-			OrderBook objOrderBook = new OrderBook ();
+            OrderBook objOrderBook = new OrderBook ();
 
             List<StockOrder> stockOrders = new List<StockOrder>();
             StockOrder objStockOrder = null;
