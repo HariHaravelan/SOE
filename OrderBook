@@ -8,36 +8,33 @@ namespace StockOrderExecution
 {
     class OrderBook
     {
-        private static Dictionary<string, int> dictOrderBook = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, int> dictOrderBook = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-    
+        public string UpdateOrderBook(string _mcompanyName, int _mquantity)
+		{
+			int _availablestocks = 0;
+			int _remainingstocks = 0;
+			string _status = Constants.Open;
+			string _translog = string.Empty;
 
+			if (dictOrderBook.ContainsKey (_mcompanyName)) {
 
-        public bool HasCompanyAvailable(string _mcompanyName)
-        {
-            return dictOrderBook.ContainsKey(_mcompanyName);
-        }
+				_availablestocks = dictOrderBook [_mcompanyName];
 
+				_remainingstocks = _availablestocks + _mquantity;
 
-        public int AvailableStocks(string _mcompanyName)
-        {
-            return dictOrderBook[_mcompanyName];
-        }
+				_status = _remainingstocks == 0 ? Constants.Closed : Constants.Open;
 
+			
+			}
+			else
+			{
+				dictOrderBook.Add(_mcompanyName, _mquantity);
 
-        public void UpdateOrderBook(string _mcompanyName, int _mquantity)
-        {
-            if (dictOrderBook.ContainsKey(_mcompanyName))
-            {
-                dictOrderBook[_mcompanyName] = _mquantity;
-         
-            }
-            else
-            {
-                dictOrderBook.Add(_mcompanyName, _mquantity);
-               
-            }
-        }
+			}
+
+			return _translog = _mquantity > 0 ? Constants.Sell : Constants.Buy + "\t" + _mcompanyName + "\t" + Math.Abs(_mquantity) + "\t" + Math.Abs(_remainingstocks) + "\t" + _status + "\n";
+		}
 
     }
 }
