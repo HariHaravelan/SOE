@@ -18,6 +18,8 @@ namespace StockOrderExecution
 
             Console.WriteLine();
 
+			OrderBook objOrderBook = new OrderBook ();
+
             List<StockOrder> stockOrders = new List<StockOrder>();
             StockOrder objStockOrder = null;
             for (var i = 0; i < totalTransactions; i++)
@@ -26,25 +28,17 @@ namespace StockOrderExecution
 
                 string[] arrInput = input.Split(' ');  //Input String should have space after the every value entry  
 
-                objStockOrder = new StockOrder();
-
-                objStockOrder.Side = arrInput[0];
-                objStockOrder.CompanyName = arrInput[1];
-                objStockOrder.Quantity = Convert.ToInt32(arrInput[2]);
+				objStockOrder = new StockOrder(arrInput[0],arrInput[1],Convert.ToInt32(arrInput[2]),objOrderBook);
 
                 stockOrders.Add(objStockOrder);
             }
 
-            foreach (StockOrder val in stockOrders)
+            foreach (StockOrder order in stockOrders)
             {
-                val.ReadOrder();
-
+				Console.WriteLine (order.ProcessOrder());
             }
 
-            string res = objStockOrder.ToString();
-            Console.WriteLine();
-            Console.WriteLine(res);
-            Console.ReadLine();
+            
 
         }
     }
